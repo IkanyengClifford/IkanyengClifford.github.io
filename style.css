@@ -114,3 +114,14 @@
     ul li  span:hover{
         background: #edeef0;
     }
+
+    .darkMode{
+
+        background-color: black;
+        color: white;
+    }
+
+    .lightMode{
+        background-color: white;
+        color: black;
+    }

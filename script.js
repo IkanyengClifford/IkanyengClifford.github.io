@@ -47,3 +47,21 @@ function showTask()
 }
 showTask();
 
+function darkMode()
+{
+
+    let element = document.body;
+    let content = document.getElementById(" DarkModetext ");
+    element.className = "darkMode";
+    content.innerText = "Dark-mode is ON";
+
+}
+
+function lightMode()
+{
+
+    let element = document.body;
+    let content = document.getElementById("DarkkModetext");
+    element.className = "darkMode";
+    content.innerText = "Dark-mode is OFF";
+}
