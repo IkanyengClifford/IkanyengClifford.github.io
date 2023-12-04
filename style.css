@@ -49,11 +49,19 @@
         margin-bottom: 25px;
     }
 
-    .to-app h3{
+    .dark-mode h3{
 
-        color: blue;
-     align-items: center;
+        display:flex;
+        color: aqua;
+        background : linear-gradient(135deg, #465980, white);
+        align-items: end;
+    }
 
+    .dark-mode button
+    {
+        color: aqua;
+        background : linear-gradient(135deg, #465980, white);
+        
     }
     
     input{
@@ -90,7 +98,7 @@
         height: 28px;
         width: 28px;
         border-radius: 50%;
-        background-image: url(D:\my-website\To-Do-list\images\unchecked.png);
+        background-image: url(D:\unchecked.png);
         background-size: cover;
         background-position: center;
         top: 12px;
@@ -103,7 +111,7 @@
     }
     
     ul li.checked::before{
-        background-image:url(D:\my-website\To-Do-list\images\checked.png);
+        background-image:url(D:\checked.png);
     }
     
     ul li span{
@@ -128,7 +136,7 @@
 
         background-color: black;
         color: white;
-        position: absolute;
+        
     }
 
     .lightMode{

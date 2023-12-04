@@ -49,19 +49,20 @@ showTask();
 
 function darkMode()
 {
-
+    localStorage.setItem("darkmode", "true")
     let element = document.body;
     let content = document.getElementById(" DarkModetext ");
     element.className = "darkMode";
     content.innerText = "Dark-mode is ON";
+    element.classList = `body-dark-${localStorage.getItem("darkmode")}`
 
 }
 
 function lightMode()
 {
-
+    localStorage.setItem("darkmode", "false")
     let element = document.body;
-    let content = document.getElementById("DarkkModetext");
-    element.className = "darkMode";
+    let content = document.getElementById(" DarkModetext ");
+    element.className = "lightMode";
     content.innerText = "Dark-mode is OFF";
 }
