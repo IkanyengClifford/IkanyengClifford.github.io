@@ -2,6 +2,9 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible"
+              content="IE=edge"/>
         <title>
             Cliff's TO-DO list
         </title>
@@ -10,21 +13,28 @@
     </head>
     <body>
    
-        <div class="container">
+        <main class="container">
            <div class="to-app">
-            <h2>To-Do List <img src="D:\my-website\To-Do-list\images\icon.png"> </h2>
+            <h2>To-Do List <img src="D:\icon.png"> </h2>
             <div class="row">
                 <input type="text" id="input-box" placeholder="add text">
                 <button onclick="addTask()" >
                     Add
                 </button>
+                <h3 id = " DarkModetext " > DarkMode is Off</h3>
+                <button onclick="darkMode()" >
+                     DarkMode
+                     </button>
+                     <button onclick="lightMode()"> 
+                        lightMode
+                    </button>
             </div>
             <ul id="list-container">
               
             </ul>
            </div>
 
-        </div>
+        </main>
 
      <script src="script.js"></script>
 
