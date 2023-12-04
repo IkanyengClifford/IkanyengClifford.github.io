@@ -37,6 +37,8 @@
         margin-left: 10px;
     }
     
+    
+
     .row{
         display: flex;
         align-items: center;
@@ -45,6 +47,13 @@
         border-radius: 30px;
         padding-left: 20px;
         margin-bottom: 25px;
+    }
+
+    .to-app h3{
+
+        color: blue;
+     align-items: center;
+
     }
     
     input{
@@ -119,6 +128,7 @@
 
         background-color: black;
         color: white;
+        position: absolute;
     }
 
     .lightMode{
