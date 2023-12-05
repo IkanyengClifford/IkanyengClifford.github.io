@@ -88,7 +88,7 @@ function checkDarkMode() {
     const darkModeState = localStorage.getItem('darkMode');
     if (darkModeState && darkModeState === 'true') {
         toggleSwitch.checked = true;
-        appContainer.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
     }
 }
 
