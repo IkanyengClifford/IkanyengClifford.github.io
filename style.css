@@ -87,7 +87,7 @@ body {
 }
 
 
-input {
+input, input[type = "text"] {
     padding: 10px;
     margin-bottom: 15px;
     border: none; 
@@ -97,9 +97,16 @@ input {
     box-sizing: border-box;
     /* Adjust width to leave space for the button, from a YT tut */
     width: calc(100% - 80px); 
-    background-color: transparent; 
+    background-color: var(--background-color);
+    color: var(--color);
 }
 
+/* update placeholder to adjust to the transition */
+::placeholder
+{
+    background-color: var(--background-color);
+    color: var(--color);
+}
 
 
 
