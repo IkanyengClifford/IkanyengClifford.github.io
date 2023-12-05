@@ -63,7 +63,7 @@ function removeTaskFromLocalStorage(taskName) {
 
 // Function to save tasks to local storage
 function saveTasks() {
-    const tasks = document.querySelectorAll('.tasks');
+    const tasks = document.querySelectorAll('tasks');
     const tasksData = Array.from(tasks).map(task=>{
 
         const taskName = task.querySelector('strong').textContent;
