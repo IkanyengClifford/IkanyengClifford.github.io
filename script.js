@@ -22,9 +22,7 @@ function addTasks() {
         dueDateElement.textContent = `Due: ${dueDate}`;
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
-        deleteButton.addEventListener('click', function() {
-            deleteTask(this);
-        });
+        deleteButton.addEventListener('click', () => deleteTask(deleteButton));
 
         tasksElement.appendChild(nameElement);
         tasksElement.appendChild(dueDateElement);
@@ -39,26 +37,39 @@ function addTasks() {
     }
 }
 
-// Function to delete tasks
 function deleteTask(button) {
     // Get the parent task element and remove it
     const taskElement = button.parentNode;
     taskElement.remove();
 
-    // Save tasks to local storage after deletion
-    saveTasks();
+    // Get the task name from the deleted task element
+    const taskName = taskElement.querySelector('strong').textContent;
+
+    // Remove the task from local storage
+    removeTaskFromLocalStorage(taskName);
 }
+
+function removeTaskFromLocalStorage(taskName) {
+    // Retrieve tasks from local storage
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    // Find and remove the task with the specified name
+    tasks = tasks.filter(task => task.name !== taskName);
+
+    // Save the updated tasks to local storage
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
 
 // Function to save tasks to local storage
 function saveTasks() {
     const tasks = document.querySelectorAll('.tasks');
-    const tasksData = [];
+    const tasksData = Array.from(tasks).map(task=>{
 
-    // Extract task name and due date from each task and store in an array
-    tasks.forEach(task => {
-        let taskName = task.querySelector('strong').textContent;
-        let dueDate = task.querySelector('p').textContent.split('Due: ')[1];
-        tasksData.push({ taskName, dueDate });
+        const taskName = task.querySelector('strong').textContent;
+        const dueDate = task.querySelector('p').textContent.split('Due: ')[1];
+        return(taskName,dueDate);
+
     });
 
     // Save the array to local storage as a JSON string
@@ -78,7 +89,7 @@ function loadTasks() {
             const tasksElement = document.createElement('div');
             tasksElement.classList.add('tasks');
 
-            //check for the task 
+            //My task 
             const taskNameElement = document.createElement('strong');
             taskNameElement.textContent = taskData.taskName;
 
@@ -86,7 +97,7 @@ function loadTasks() {
             const dueDateElement = document.createElement('span');
             dueDateElement.textContent = `Due: ${taskData.dueDate}`;
 
-            //My delete function bbtton
+            //My delete function button
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', function() {
