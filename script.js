@@ -8,16 +8,28 @@ document.addEventListener('DOMContentLoaded', () => {
 function addTasks() {
     const tasksName = document.getElementById('tasksName').value.trim();
     const dueDate = document.getElementById('dueDate').value;
-    
+
     if (tasksName !== '' && dueDate !== '') {
         // Create a new tasks element and enable it to be deleted
         const tasksContainer = document.getElementById('tasks-container');
         const tasksElement = document.createElement('div');
         tasksElement.classList.add('tasks');
-        tasksElement.innerHTML = `
-            <strong>${tasksName}</strong><p>
-            Due: ${dueDate}<p>
-            <button onclick="deleteTask(this)">Delete</button>`;
+
+        // Create and append child elements
+        const nameElement = document.createElement('strong');
+        nameElement.textContent = tasksName;
+        const dueDateElement = document.createElement('p');
+        dueDateElement.textContent = `Due: ${dueDate}`;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function() {
+            deleteTask(this);
+        });
+
+        tasksElement.appendChild(nameElement);
+        tasksElement.appendChild(dueDateElement);
+        tasksElement.appendChild(deleteButton);
+
         tasksContainer.appendChild(tasksElement);
 
         // Save my tasks to local storage
@@ -44,9 +56,8 @@ function saveTasks() {
 
     // Extract task name and due date from each task and store in an array
     tasks.forEach(task => {
-        const taskName = task.querySelector('strong').textContent;
-        const dueDate = task.querySelector('p').textContent
-        .split('Due: ')[1];
+        let taskName = task.querySelector('strong').textContent;
+        let dueDate = task.querySelector('p').textContent.split('Due: ')[1];
         tasksData.push({ taskName, dueDate });
     });
 
@@ -66,14 +77,34 @@ function loadTasks() {
         tasksData.forEach(taskData => {
             const tasksElement = document.createElement('div');
             tasksElement.classList.add('tasks');
-            tasksElement.innerHTML = `
-                <strong>${taskData.taskName}</strong><br>
-                Due: ${taskData.dueDate}
-                <button onclick="deleteTask(this)">Delete</button>`;
+
+            //check for the task 
+            const taskNameElement = document.createElement('strong');
+            taskNameElement.textContent = taskData.taskName;
+
+            //The Due date
+            const dueDateElement = document.createElement('span');
+            dueDateElement.textContent = `Due: ${taskData.dueDate}`;
+
+            //My delete function bbtton
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function() {
+                deleteTask(this);
+            });
+
+            // Append child elements to the tasksElement
+            tasksElement.appendChild(taskNameElement);
+            tasksElement.appendChild(document.createElement('br'));
+            tasksElement.appendChild(dueDateElement);
+            tasksElement.appendChild(deleteButton);
+
+            // Append tasksElement to the tasksContainer
             tasksContainer.appendChild(tasksElement);
         });
     }
 }
+
 
 // Function to check and toggle dark mode
 function checkDarkMode() {
