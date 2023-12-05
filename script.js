@@ -1,68 +1,98 @@
-const inputBox = document.getElementById("input-box");
-const listContainer = document.getElementById("list-container");
+//to ensure that code wont run until content is fully loaded without waiting for my images and stylesheets
+document.addEventListener('DOMContentLoaded', () => {
+    loadTasks(); // Load tasks when the document is ready
+    checkDarkMode(); // Check and apply dark mode
+});
 
-
-function addTask()
-{
+// Function to add tasks
+function addTasks() {
+    const tasksName = document.getElementById('tasksName').value.trim();
+    const dueDate = document.getElementById('dueDate').value;
     
-    if(inputBox.value === '')
-    {
-        alert("Write task");
+    if (tasksName !== '' && dueDate !== '') {
+        // Create a new tasks element and enable it to be deleted
+        const tasksContainer = document.getElementById('tasks-container');
+        const tasksElement = document.createElement('div');
+        tasksElement.classList.add('tasks');
+        tasksElement.innerHTML = `
+            <strong>${tasksName}</strong><br>
+            Due: ${dueDate}
+            <button onclick="deleteTask(this)">Delete</button>`;
+        tasksContainer.appendChild(tasksElement);
+
+        // Save my tasks to local storage
+        saveTasks();
+    } else {
+        alert('Please specify a due date for your task');
     }
-    else{
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
-        let span = document.createElement("span");
-        span.innerHTML = "\u00d7";
-        li.appendChild(span)
-    }
-    inputBox.value= "";
-    saveData();
 }
 
-listContainer.addEventListener("click", function(e){
+// Function to delete tasks
+function deleteTask(button) {
+    // Get the parent task element and remove it
+    const taskElement = button.parentNode;
+    taskElement.remove();
 
-    if(e.target.tagName === "LI")
-    {
-        e.target.classList.toggle("checked");
-        saveData();
+    // Save tasks to local storage after deletion
+    saveTasks();
+}
+
+// Function to save tasks to local storage
+function saveTasks() {
+    const tasks = document.querySelectorAll('.tasks');
+    const tasksData = [];
+
+    // Extract task name and due date from each task and store in an array
+    tasks.forEach(task => {
+        const taskName = task.querySelector('strong').textContent;
+        const dueDate = task.textContent.split('Due: ')[1];
+        tasksData.push({ taskName, dueDate });
+    });
+
+    // Save the array to local storage as a JSON string
+    localStorage.setItem('tasks', JSON.stringify(tasksData));
+}
+
+// Function to load tasks from local storage
+function loadTasks() {
+    const tasksContainer = document.getElementById('tasks-container');
+    const savedTasks = localStorage.getItem('tasks');
+
+    if (savedTasks) {
+        const tasksData = JSON.parse(savedTasks);
+
+        // Create tasks element for each saved task with a delete button
+        tasksData.forEach(taskData => {
+            const tasksElement = document.createElement('div');
+            tasksElement.classList.add('tasks');
+            tasksElement.innerHTML = `
+                <strong>${taskData.taskName}</strong><br>
+                Due: ${taskData.dueDate}
+                <button onclick="deleteTask(this)">Delete</button>`;
+            tasksContainer.appendChild(tasksElement);
+        });
     }
-    else  if(e.target.tagName === "SPAN"){
-        e.target.parentElement.remove();
-        saveData();
+}
 
+// Function to check and toggle dark mode
+function checkDarkMode() {
+    const toggleSwitch = document.getElementById('toggleSwitch');
+    const appContainer = document.getElementById('app-container');
+
+    toggleSwitch.addEventListener('change', () => {
+        appContainer.classList.toggle('dark-mode', toggleSwitch.checked);
+        saveDarkModeState();
+    });
+
+    const darkModeState = localStorage.getItem('darkMode');
+    if (darkModeState && darkModeState === 'true') {
+        toggleSwitch.checked = true;
+        appContainer.classList.add('dark-mode');
     }
-    }, false);
-
-
-function saveData(){
-    localStorage.setItem("data", listContainer.innerHTML);
-
 }
 
-function showTask()
-{
-    listContainer.innerHTML= localStorage.getItem("data");
-}
-showTask();
-
-function darkMode()
-{
-    localStorage.setItem("darkmode", "true")
-    let element = document.body;
-    let content = document.getElementById(" DarkModetext ");
-    element.className = "darkMode";
-    content.innerText = "Dark-mode is ON";
-    element.classList = `body-dark-${localStorage.getItem("darkmode")}`
-
-}
-
-function lightMode()
-{
-    localStorage.setItem("darkmode", "false")
-    let element = document.body;
-    let content = document.getElementById(" DarkModetext ");
-    element.className = "lightMode";
-    content.innerText = "Dark-mode is OFF";
+// Function to save dark mode state to local storage
+function saveDarkModeState() {
+    const toggleSwitch = document.getElementById('toggleSwitch');
+    localStorage.setItem('darkMode', toggleSwitch.checked);
 }

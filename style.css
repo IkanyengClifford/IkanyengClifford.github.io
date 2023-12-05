@@ -1,145 +1,144 @@
-*{
-
+body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.4s, color 0.4s;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tasks {
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+.add-tasks {
+    margin-top: 20px;
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding:10px;
+
+
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+
+input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none; 
+    /* Add a bottom border for a subtle separation */
+    border-bottom: 1px solid #ddd; 
+    border-radius: 5px;
     box-sizing: border-box;
-    
-    }
-    
-    .container{
-        width:  100%;
-        min-height: 100vh;
-        background : linear-gradient(135deg, #465980, white);
-        padding: 10px;
-    } 
-    
-    .to-app{
-        width: 100%;
-        max-width: 540px;
-        background: white;
-        margin: 100px auto 20px;
-        padding: 40px 30px 70px;
-        border-radius: 10px;
-    }
-    
-    .to-app h2{
-        color: aquamarine;
-    
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    
-    }
-    
-    .to-app h2 img{
-        width: 30px;
-        margin-left: 10px;
-    }
-    
-    
+    /* Adjust width to leave space for the button, from a YT tut */
+    width: calc(100% - 80px); 
+    background-color: transparent; 
+}
 
-    .row{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #edeef0;
-        border-radius: 30px;
-        padding-left: 20px;
-        margin-bottom: 25px;
-    }
 
-    .dark-mode h3{
 
-        display:flex;
-        color: aqua;
-        background : linear-gradient(135deg, #465980, white);
-        align-items: end;
-    }
 
-    .dark-mode button
-    {
-        color: aqua;
-        background : linear-gradient(135deg, #465980, white);
-        
-    }
-    
-    input{
-        flex: 1; 
-        border: none;
-        outline: none;
-        background: transparent;
-        padding: 10px;
-    }
-    
-    button{
-        border: none;
-        outline: none;
-        padding:  16px 50px;
-        background: blue;
-        color: #fff;
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 40px;
-    }
-    
-    ul li{
-        list-style: none;
-        font-size: 17px;
-        padding: 12px 8px 12px 50px;
-        user-select: none;
-        cursor: pointer;
-        position: relative;
-    }
-    
-    ul li::before{
-        content: '';
-        position: absolute;
-        height: 28px;
-        width: 28px;
-        border-radius: 50%;
-        background-image: url(D:\unchecked.png);
-        background-size: cover;
-        background-position: center;
-        top: 12px;
-        left: 8px;
-    }
-    
-    ul li.checked{
-        color:  #555;
-        text-decoration: line-through;
-    }
-    
-    ul li.checked::before{
-        background-image:url(D:\checked.png);
-    }
-    
-    ul li span{
-        position: absolute;
-        right: 0;
-        top: 5px;
-        width: 40px;
-        height: 40px;
-        font-size: 22px;
-        color: #555;
-        line-height: 40px;
-        text-align: center;
-        border-radius:50%;
-    
-    }
-    
-    ul li  span:hover{
-        background: #edeef0;
-    }
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 80px;
+    background-color: #3498db; 
+    color: #fff; 
+    cursor: pointer;
+}
 
-    .darkMode{
 
-        background-color: black;
-        color: white;
-        
-    }
+input:focus {
+    outline: none;
+    border-bottom: 2px solid #3498db; 
+}
 
-    .lightMode{
-        background-color: white;
-        color: black;
-    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .tasks {
+    background-color: #444;
+    color: #fff;
+}
+

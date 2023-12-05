@@ -1,48 +1,35 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible"
-              content="IE=edge"/>
-        <title>
-            Cliff's TO-DO list
-        </title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>To-Do App</title>
+</head>
+<body>
+    <div class="app-container" id="app-container">
+        <!-- Header with app title and dark mode toggle switch -->
+        <div class="header">
+            <h1>To-Do App</h1>
+            <label class="switch">
+                <input type="checkbox" id="toggleSwitch">
+                <span class="slider round"></span>
+            </label>
+        </div>
 
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-   
-        <main class="dark-mode" >
-            <h3 id = " DarkModetext " > DarkMode is Off</h3>
-            <button onclick="darkMode()" >
-                DarkMode
-                </button>
-                 <button onclick="lightMode()"> 
-                    lightMode
-                </button>
-        </main>
-        <main class="container">
-           <div class="to-app">
-            <h2>To-Do List <img src="D:\icon.png"> </h2>
-            <div class="row">
-                <input type="text" id="input-box" placeholder="Enter Task">
-                <button onclick="addTask()" >
-                    Add
-                </button>
-              
-               
-            </div>
-            <ul id="list-container">
-              
-            </ul>
-           </div>
+        <!-- Container for displaying tasks -->
+        <div class="tasks" id="tasks-container">
+            <!-- Tasks will be dynamically added here -->
+        </div>
 
-        </main>
+        <!-- Form to add new tasks with task name, due date, and add button -->
+        <div class="add-tasks">
+            <input type="text" id="tasksName" placeholder="Enter task name">
+            <input type="date" id="dueDate">
+            <button onclick="addTasks()">Add Task</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
 
-     <script src="script.js"></script>
-
-
-    </body>   
-
-</html> 
