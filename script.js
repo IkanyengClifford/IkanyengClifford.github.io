@@ -15,8 +15,8 @@ function addTasks() {
         const tasksElement = document.createElement('div');
         tasksElement.classList.add('tasks');
         tasksElement.innerHTML = `
-            <strong>${tasksName}</strong><br>
-            Due: ${dueDate}
+            <strong>${tasksName}</strong><p>
+            Due: ${dueDate}<p>
             <button onclick="deleteTask(this)">Delete</button>`;
         tasksContainer.appendChild(tasksElement);
 
@@ -45,7 +45,8 @@ function saveTasks() {
     // Extract task name and due date from each task and store in an array
     tasks.forEach(task => {
         const taskName = task.querySelector('strong').textContent;
-        const dueDate = task.textContent.split('Due: ')[1];
+        const dueDate = task.querySelector('p').textContent
+        .split('Due: ')[1];
         tasksData.push({ taskName, dueDate });
     });
 
@@ -80,7 +81,7 @@ function checkDarkMode() {
     const appContainer = document.getElementById('app-container');
 
     toggleSwitch.addEventListener('change', () => {
-        appContainer.classList.toggle('dark-mode', toggleSwitch.checked);
+        document.body.classList.toggle('dark-mode', toggleSwitch.checked);
         saveDarkModeState();
     });
 
